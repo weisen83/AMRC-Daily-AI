@@ -100,12 +100,9 @@ if "candidates" in result:
     text = result["candidates"][0]["content"]["parts"][0]["text"]
 else:
     text = "AI Error: " + str(result)
-
-
-data = {
-     "date": "AUTO UPDATE",
-    "condition": "AI Generated",
-    "analysis": text
+text = text.replace("```json", "")
+text = text.replace("```", "")
+data = josn.loads(text)
 }
 
 
