@@ -61,6 +61,11 @@ response = requests.post(
 result = response.json()
 
 
+print(result)
+
+if "candidates" not in result:
+    raise Exception(result)
+
 text = result["candidates"][0]["content"]["parts"][0]["text"]
 
 
