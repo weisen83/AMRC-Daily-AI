@@ -1,13 +1,50 @@
-name: AMRC Daily Update
+
+name: AMRC Daily AI Update
+
 on:
   schedule:
-    - cron: '0 23 * * *'
+    - cron: "0 1 * * *"
+
   workflow_dispatch:
+
+
 jobs:
-  update:
+  update-market:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - run: python automation/fetch_market.py
-      - run: python automation/ai_report.py
-      - run: python automation/social_generator.py
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+
+    - name: Install packages
+      run: |
+        pip install requests
+
+
+    - name: Run AI Analysis
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      run: |
+        python ai_report.py
+
+
+    - name: Commit update
+      run: |
+        git config --global user.name "AMRC AI"
+        git config --global user.email "ai@amrc.com"
+
+        git add market.json
+
+        git commit -m "AI daily market update" || exit 0
+
+        git push
