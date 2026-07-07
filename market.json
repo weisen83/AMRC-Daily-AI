@@ -1,1 +1,24 @@
-# Connect market API: XAUUSD NASDAQ BTC DXY VIX
+{
+  "date": "AUTO UPDATE",
+  "condition": "Waiting AI Analysis",
+  "markets": [
+    {
+      "name": "XAUUSD",
+      "structure": "Market Structure\nLiquidity\nOrder Flow\nTrading Plan"
+    },
+    {
+      "name": "NASDAQ",
+      "structure": "Market Structure\nLiquidity\nOrder Flow\nTrading Plan"
+    },
+    {
+      "name": "BTC",
+      "structure": "Market Structure\nLiquidity\nOrder Flow\nTrading Plan"
+    }
+  ],
+  "social": {
+    "line": "",
+    "threads": "",
+    "ig": "",
+    "discord": ""
+  }
+}

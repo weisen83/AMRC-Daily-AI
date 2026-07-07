@@ -1,0 +1,1 @@
+# Connect market API: XAUUSD NASDAQ BTC DXY VIX
