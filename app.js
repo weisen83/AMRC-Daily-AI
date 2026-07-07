@@ -1,81 +1,48 @@
-fetch("market.json")
+fetch("./market.json")
 .then(response => response.json())
 .then(data => {
 
+    document.getElementById("date").innerText = data.date;
 
-document.getElementById("date").innerHTML =
-`
-<h3>${data.date}</h3>
-<p>${data.condition}</p>
-`;
+    let html = "";
 
-
-
-let html = "";
-
-
-data.markets.forEach(market => {
+    html += `
+    <div class="card">
+        <h2>${data.condition}</h2>
+    </div>
+    `;
 
 
-html += `
+    data.markets.forEach(market => {
 
-data.markets.forEach(market => {
+        html += `
+        <div class="card">
 
-html += `
+            <h2>${market.name}</h2>
 
-<div class="card">
+            <pre>${market.structure}</pre>
 
-<h2>${market.name}</h2>
+            <button onclick="copyText(\`${market.structure}\`)">
+            複製分析
+            </button>
 
-<h3>📊 Market Structure</h3>
-<p>${market.structure}</p>
+        </div>
+        `;
 
-
-<h3>💧 Liquidity</h3>
-<p>${market.liquidity || "Waiting AI Update"}</p>
-
-
-<h3>🔥 Order Flow</h3>
-<p>${market.orderflow || "Waiting AI Update"}</p>
+    });
 
 
-<h3>🎯 Trading Plan</h3>
-<p>${market.plan || "Waiting AI Update"}</p>
-
-
-<button onclick="copyText('${market.structure}')">
-Copy Report
-</button>
-
-
-</div>
-
-`;
-
-});
-
-
-</div>
-
-`;
-
-});
-
-
-document.getElementById("content").innerHTML = html;
-
+    document.getElementById("content").innerHTML = html;
 
 })
+.catch(error => {
 
-.catch(error=>{
+    console.log(error);
 
-document.getElementById("content").innerHTML =
-"資料載入失敗";
-
-console.log(error);
+    document.getElementById("content").innerHTML =
+    "<h2>資料載入失敗</h2>";
 
 });
-
 
 
 function copyText(text){
