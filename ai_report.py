@@ -15,28 +15,61 @@ URL = (
 prompt = """
 你是 AMRC Order Flow 市場分析師。
 
-請每日分析：
+請分析以下市場：
 
 1. XAUUSD 黃金
-2. NASDAQ
+2. NASDAQ 指數
 3. BTC
 
-使用以下架構：
+請嚴格輸出 JSON 格式，不要加入任何文字。
+
+JSON格式：
+
+{
+ "date":"",
+ "condition":"AI Generated",
+ "markets":[
+   {
+    "name":"",
+    "bias":"",
+    "market_structure":"",
+    "liquidity":"",
+    "order_flow":"",
+    "key_level":"",
+    "trading_plan":"",
+    "risk_management":""
+   }
+ ]
+}
+
+
+分析標準：
 
 Market Structure:
-分析市場結構
+- 趨勢方向
+- HH/HL 或 LH/LL
+- 結構轉換
 
 Liquidity:
-分析流動性位置
+- Buy Side Liquidity
+- Sell Side Liquidity
+- Sweep位置
 
 Order Flow:
-分析 Delta、CVD、吸收、主動買賣
+- Delta
+- CVD
+- Absorption
+- Initiative / Responsive
 
 Trading Plan:
-提供交易規劃
+- Entry zone
+- Confirmation
+- Invalid level
 
-輸出 JSON 格式。
+請保持專業交易員語氣。
+
 """
+  
 
 
 response = requests.post(
