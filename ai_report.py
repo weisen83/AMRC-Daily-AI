@@ -7,7 +7,7 @@ API_KEY = os.environ["GEMINI_API_KEY"]
 
 URL = (
     "https://generativelanguage.googleapis.com/v1beta/"
-    "models/gemini-1.5-flash:generateContent"
+    "models/gemini-2.0-flash:generateContent"
     f"?key={API_KEY}"
 )
 
@@ -63,10 +63,10 @@ result = response.json()
 
 print(result)
 
-if "candidates" not in result:
-    raise Exception(result)
-
-text = result["candidates"][0]["content"]["parts"][0]["text"]
+if "candidates" in result:
+    text = result["candidates"][0]["content"]["parts"][0]["text"]
+else:
+    text = "AI Error: " + str(result)
 
 
 data = {
