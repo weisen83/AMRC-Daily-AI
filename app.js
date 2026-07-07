@@ -16,18 +16,37 @@ fetch("./market.json")
     data.markets.forEach(market => {
 
         html += `
-        <div class="card">
+<div class="card">
 
-            <h2>${market.name}</h2>
+<h2>${market.name}</h2>
 
-            <pre>${market.structure}</pre>
+<h3>📌 Market Structure</h3>
+<p>${market.market_structure}</p>
 
-            <button onclick="copyText(\`${market.structure}\`)">
-            複製分析
-            </button>
+<h3>💧 Liquidity</h3>
+<p>${market.liquidity}</p>
 
-        </div>
-        `;
+<h3>📊 Order Flow</h3>
+<p>${market.order_flow}</p>
+
+<h3>🎯 Trading Plan</h3>
+<p>${market.trading_plan}</p>
+
+<button onclick="copyText(
+\`${market.market_structure}
+
+${market.liquidity}
+
+${market.order_flow}
+
+${market.trading_plan}\`
+)">
+複製分析
+</button>
+
+</div>
+`;
+
 
     });
 
