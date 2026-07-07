@@ -103,9 +103,7 @@ else:
 
 
 data = {
-    "date":"AUTO UPDATE",
-    "condition":"AI Generated",
-    "analysis":text
+    "error": str(result)
 }
 
 
