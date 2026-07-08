@@ -30,7 +30,7 @@ markets.forEach(market => {
 
 
 const name =
-market.商品名 ||
+market.商品 ||
 market.name ||
 market.symbol ||
 "XAUUSD";
@@ -49,7 +49,7 @@ market.liquidity ||
 
 
 const orderFlow =
-market.訂單流 ||
+market.訂單流程 ||
 market.order_flow ||
 market.orderFlow ||
 "資料更新中";
