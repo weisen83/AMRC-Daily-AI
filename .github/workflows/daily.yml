@@ -20,8 +20,6 @@ jobs:
         run: |
           pip install requests
 
-      - name: Run AI analysis
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Update Market Data
         run: |
-          python ai_report.py
+          python fetch_market.py
