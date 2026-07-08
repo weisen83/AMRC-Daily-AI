@@ -28,8 +28,6 @@ jobs:
     - name: Install packages
       run: |
         pip install requests
-        pip install google-generativeai
-
 
     - name: Update Market Data
       run: |
