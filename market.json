@@ -8,14 +8,20 @@
       "liquidity": "測試流動性",
       "order_flow": "測試訂單流",
       "trading_plan": "測試交易計畫"
-    }
-  ]
+    },
+    {
       "name": "NASDAQ",
-      "structure": "Market Structure\nLiquidity\nOrder Flow\nTrading Plan"
+      "market_structure": "測試市場結構",
+      "liquidity": "測試流動性",
+      "order_flow": "測試訂單流",
+      "trading_plan": "測試交易計畫"
     },
     {
       "name": "BTC",
-      "structure": "Market Structure\nLiquidity\nOrder Flow\nTrading Plan"
+      "market_structure": "測試市場結構",
+      "liquidity": "測試流動性",
+      "order_flow": "測試訂單流",
+      "trading_plan": "測試交易計畫"
     }
   ],
   "social": {
