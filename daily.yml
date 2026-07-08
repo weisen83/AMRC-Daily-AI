@@ -31,12 +31,9 @@ jobs:
         pip install google-generativeai
 
 
-    - name: Run AI Analysis
-      env:
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
+    - name: Update Market Data
       run: |
-        python ai_report.py
+        python fetch_market.py
 
 
     - name: Commit update
@@ -46,6 +43,6 @@ jobs:
 
         git add market.json
 
-        git commit -m "AI daily market update" || exit 0
+        git commit -m "Daily market update" || exit 0
 
         git push
