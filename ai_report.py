@@ -1,7 +1,7 @@
 import json
-from datetime import datetime
-import urllib.request
 import os
+import urllib.request
+from datetime import datetime
 
 
 API_KEY = os.environ["GEMINI_API_KEY"]
@@ -14,22 +14,26 @@ URL = (
 
 
 prompt = """
-你是 AMRC Order Flow 交易分析師。
+你是 AMRC Institutional Order Flow 分析師。
 
 請產生今日市場分析。
 
-分析商品:
+分析：
 1. XAUUSD 黃金
 2. NASDAQ
 3. BTC
 
-使用：
-Market Structure
-Liquidity
-Order Flow
-Trading Plan
+每個商品需要：
 
-輸出 JSON 格式:
+- 市場結構 Market Structure
+- 流動性 Liquidity
+- Order Flow
+- Trading Plan
+
+
+只輸出 JSON，不要 Markdown。
+
+格式：
 
 {
 "日期":"",
@@ -44,17 +48,15 @@ Trading Plan
 }
 ]
 }
-
-不要加入其他文字。
 """
 
 
-data = {
-    "contents":[
+payload = {
+    "contents": [
         {
-            "parts":[
+            "parts": [
                 {
-                    "text":prompt
+                    "text": prompt
                 }
             ]
         }
@@ -62,27 +64,27 @@ data = {
 }
 
 
-req = urllib.request.Request(
+request = urllib.request.Request(
     URL,
-    data=json.dumps(data).encode(),
+    data=json.dumps(payload).encode("utf-8"),
     headers={
-        "Content-Type":"application/json"
+        "Content-Type": "application/json"
     }
 )
 
 
-response = urllib.request.urlopen(req)
+response = urllib.request.urlopen(request)
 
 result = json.loads(
-    response.read()
+    response.read().decode("utf-8")
 )
 
 
 text = result["candidates"][0]["content"]["parts"][0]["text"]
 
 
-text = text.replace("```json","")
-text = text.replace("```","")
+text = text.replace("```json", "")
+text = text.replace("```", "")
 
 
 report = json.loads(text)
@@ -95,13 +97,13 @@ with open(
     "market.json",
     "w",
     encoding="utf-8"
-) as f:
+) as file:
     json.dump(
         report,
-        f,
+        file,
         ensure_ascii=False,
         indent=2
     )
 
 
-print("AMRC AI Update Complete")
+print("AMRC AI Report Updated")
