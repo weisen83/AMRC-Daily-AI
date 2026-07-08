@@ -10,7 +10,7 @@ API_KEY = os.environ["GEMINI_API_KEY"]
 
 URL = (
     "https://generativelanguage.googleapis.com/v1beta/"
-    "models/gemini-2.0-flash:generateContent?key="
+    "models/gemini-2.0-flash-lite:generateContent?key="
     + API_KEY
 )
 
@@ -83,7 +83,7 @@ for attempt in range(3):
     except urllib.error.HTTPError as e:
         if e.code == 429:
             print("Gemini API busy, retry...")
-            time.sleep(15)
+            time.sleep(60)
         else:
             raise
 
