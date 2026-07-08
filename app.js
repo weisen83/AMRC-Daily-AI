@@ -13,7 +13,7 @@ console.log(data)；
     </div>
     `;
 
- data["市場"].forEach(market => {
+data["市場"].forEach(market => {
 
 html += `
 <div class="card">
@@ -32,26 +32,10 @@ html += `
 <h3>🎯 Trading Plan</h3>
 <p>${market["交易計畫"]}</p>
 
-
-<button onclick="copyText(
-`${market["市場結構"]}
-
-${market["流動性"]}
-
-${market["訂單流"]}
-
-${market["交易計畫"]}
-)">
-複製分析
-</button>
-
-
 </div>
 `;
 
 });
-
-
     document.getElementById("content").innerHTML = html;
 
 })
