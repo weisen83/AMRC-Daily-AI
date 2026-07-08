@@ -34,13 +34,13 @@ html += `
 
 
 <button onclick="copyText(
-\`${market["市場結構"]}
+`${market["市場結構"]}
 
 ${market["流動性"]}
 
 ${market["訂單流"]}
 
-${market["交易計畫"]}\`
+${market["交易計畫"]}
 )">
 複製分析
 </button>
