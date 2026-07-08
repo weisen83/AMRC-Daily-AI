@@ -1,11 +1,12 @@
 fetch("./market.json")
 .then(response => response.json())
 .then(data => {
-console.log(data)；
 
-    document.getElementById("date").innerText = data.date;
+console.log(data);
 
-    let html = "";
+document.getElementById("date").innerText = data.date;
+
+let html = "";
 
     html += `
     <div class="card">
