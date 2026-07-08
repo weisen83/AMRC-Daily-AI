@@ -1,3 +1,4 @@
+
 name: AMRC Daily AI Update
 
 on:
@@ -18,8 +19,25 @@ jobs:
 
       - name: Install packages
         run: |
-          pip install requests
+          pip install requests google-generativeai
 
       - name: Update Market Data
         run: |
           python fetch_market.py
+
+      - name: Run AI Analysis
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python ai_report.py || echo "AI failed, keep market data"
+
+      - name: Commit update
+        run: |
+          git config --global user.name "AMRC AI"
+          git config --global user.email "ai@amrc.com"
+
+          git add market.json
+
+          git commit -m "Daily AI market update" || exit 0
+
+          git push
