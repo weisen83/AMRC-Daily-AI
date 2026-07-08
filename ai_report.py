@@ -31,13 +31,10 @@ JSON格式：
  "markets":[
    {
     "name":"",
-    "bias":"",
     "market_structure":"",
     "liquidity":"",
     "order_flow":"",
-    "key_level":"",
     "trading_plan":"",
-    "risk_management":""
    }
  ]
 }
