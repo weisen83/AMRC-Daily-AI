@@ -2,9 +2,12 @@
 name: AMRC Daily AI Update
 
 permissions:
-   contents: write
-  
+  contents: write
+
 on:
+  schedule:
+    - cron: "0 8 * * 1-5"
+
   workflow_dispatch:
 
 jobs:
