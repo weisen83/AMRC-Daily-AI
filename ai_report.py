@@ -100,9 +100,6 @@ else:
 text = text.replace("```json", "")
 text = text.replace("```", "")
 data = josn.loads(text)
-}
-
-
 with open(
     "market.json",
     "w",
