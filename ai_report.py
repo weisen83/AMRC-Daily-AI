@@ -2,6 +2,8 @@ import json
 import os
 import urllib.request
 from datetime import datetime
+import time
+import urllib.error
 
 
 API_KEY = os.environ["GEMINI_API_KEY"]
@@ -73,7 +75,20 @@ request = urllib.request.Request(
 )
 
 
-response = urllib.request.urlopen(request)
+for attempt in range(3):
+    try:
+        response = urllib.request.urlopen(request)
+        break
+
+    except urllib.error.HTTPError as e:
+        if e.code == 429:
+            print("Gemini API busy, retry...")
+            time.sleep(15)
+        else:
+            raise
+
+else:
+    raise Exception("Gemini API unavailable")
 
 result = json.loads(
     response.read().decode("utf-8")
