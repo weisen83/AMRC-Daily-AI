@@ -33,13 +33,13 @@ fetch("./market.json")
 <p>${market【"交易計畫"】}</p>
 
 <button onclick="copyText(
-\`${market.market_structure}
+\`${market【"市場結構"】}
 
-${market.liquidity}
+${market【"流動性"】}
 
-${market.order_flow}
+${market【"訂單流"】}
 
-${market.trading_plan}\`
+${market【"交易計畫"】}\`
 )">
 複製分析
 </button>
