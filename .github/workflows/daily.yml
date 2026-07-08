@@ -1,14 +1,9 @@
-
 name: AMRC Daily AI Update
 
-permissions:
-  contents: write
-
 on:
-  schedule:
-    - cron: "0 8 * * 1-5"
-
   workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
 
 jobs:
   update-market:
@@ -17,35 +12,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-         token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install packages
-        run: |
-          pip install requests google-generativeai
-
-      - name: Update Market Data
-        run: |
-          python fetch_market.py
-
-      - name: Run AI Analysis
+      - name: Run AI Report
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python ai_report.py || echo "AI failed, keep market data"
+          python ai_report.py
 
-      - name: Commit update
+      - name: Commit market.json
         run: |
           git config --global user.name "AMRC AI"
           git config --global user.email "ai@amrc.com"
-
           git add market.json
-
-          git commit -m "Daily AI market update" || exit 0
-
+          git commit -m "Update AI market report" || exit 0
           git push
