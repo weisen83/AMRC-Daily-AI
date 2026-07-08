@@ -4,51 +4,108 @@ fetch("./market.json")
 
 console.log(data);
 
-document.getElementById("date").innerText = data.日期 || "每日市場更新";
+
+// 日期
+document.getElementById("date").innerText =
+data.日期 || data.date || "每日市場更新";
+
 
 let html = "";
 
-// 狀態
+
+// 標題
 html += `
 <div class="card">
-<h2>${data.狀態 || "AMRC Daily AI"}</h2>
+<h2>AMRC Daily AI 市場分析</h2>
+<p>${data.狀態 || data.condition || "AI Generated"}</p>
 </div>
 `;
 
 
 // 市場資料
-data.市場.forEach(market => {
+const markets = data.市場 || data.markets || [];
+
+
+markets.forEach(market => {
+
+
+const name =
+market.商品名 ||
+market.name ||
+market.symbol ||
+"XAUUSD";
+
+
+const structure =
+market.市場結構 ||
+market.market_structure ||
+"資料更新中";
+
+
+const liquidity =
+market.流動性 ||
+market.liquidity ||
+"資料更新中";
+
+
+const orderFlow =
+market.訂單流 ||
+market.order_flow ||
+market.orderFlow ||
+"資料更新中";
+
+
+const plan =
+market.交易計畫 ||
+market.trading_plan ||
+"資料更新中";
+
 
 html += `
+
 <div class="card">
 
-<h2>${market.商品名 || "Market"}</h2>
+
+<h2>${name}</h2>
+
 
 <h3>📌 Market Structure</h3>
-<p>${market.市場結構 || "資料更新中"}</p>
+<p>${structure}</p>
 
 
 <h3>💧 Liquidity</h3>
-<p>${market.流動性 || "資料更新中"}</p>
+<p>${liquidity}</p>
 
 
 <h3>📊 Order Flow</h3>
-<p>${market.訂單流 || "資料更新中"}</p>
+<p>${orderFlow}</p>
 
 
 <h3>🎯 Trading Plan</h3>
-<p>${market.交易計畫 || "資料更新中"}</p>
+<p>${plan}</p>
 
 
-<button onclick="copyText('${market.商品名}
-${market.市場結構}
-${market.流動性}
-${market.訂單流}
-${market.交易計畫}')">
+<button onclick="copyText(
+\`${name}
+
+Market Structure:
+${structure}
+
+Liquidity:
+${liquidity}
+
+Order Flow:
+${orderFlow}
+
+Trading Plan:
+${plan}\`
+)">
 複製分析
 </button>
 
+
 </div>
+
 `;
 
 });
@@ -60,7 +117,7 @@ document.getElementById("content").innerHTML = html;
 })
 .catch(error => {
 
-console.error("資料錯誤:", error);
+console.error("資料載入錯誤:", error);
 
 document.getElementById("content").innerHTML =
 "<h3>資料載入失敗</h3>";
@@ -68,7 +125,7 @@ document.getElementById("content").innerHTML =
 });
 
 
-// 複製功能
+
 function copyText(text){
 
 navigator.clipboard.writeText(text);
