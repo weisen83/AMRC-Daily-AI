@@ -88,7 +88,8 @@ for attempt in range(3):
             raise
 
 else:
-    raise Exception("Gemini API unavailable")
+    print("Gemini unavailable, keep old report")
+exit(0)
 
 result = json.loads(
     response.read().decode("utf-8")
