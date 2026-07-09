@@ -21,7 +21,12 @@ for name, symbol in symbols.items():
     try:
         r = requests.get(url).json()
 
-        price = r["chart"]["result"][0]["meta"]["regularMarketPrice"]
+        result = r["chart"]["result"][0]
+
+price = result["meta"].get(
+    "regularMarketPrice",
+    result["indicators"]["quote"][0]["close"][-1]
+)
 
         data.append({
             "商品": name,
